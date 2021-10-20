@@ -1,0 +1,6 @@
+h1 {
+  cursor: pointer;
+}
+h1:hover {
+  color: goldenrod;
+}

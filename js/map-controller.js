@@ -1,15 +1,4 @@
 'use strict';
-// function initMap() {
-//   const eilat = { lat: 29.55208744174587, lng: 34.95272486138504 };
-//   const map = new google.maps.Map(document.getElementById('map'), {
-//     zoom: 12,
-//     center: eilat,
-//   });
-//   const marker = new google.maps.Marker({
-//     position: eilat,
-//     map: map,
-//   });
-// }
 
 let map, infoWindow;
 function initMap() {
@@ -57,10 +46,15 @@ function initMap() {
     });
 
     let pos = JSON.stringify(mapsMouseEvent.latLng);
-    infoWindow.setContent(userInput(pos));
+    infoWindow.setContent(onUserInput(pos));
     // infoWindow.setContent(JSON.stringify(userInput(pos), null, 2));
     infoWindow.open(map);
   });
+}
+
+function onUserInput(pos) {
+  userInput(pos);
+  renderTable();
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -71,4 +65,25 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
+}
+
+function renderTable() {
+  var locations = getMarkersData();
+  var strHTML = '';
+  locations.forEach((val, idx) => {
+    strHTML += `
+    <tr>
+      <td>${val.id}</td>
+      <td>${val.name}</td>
+      <td>lat:${val.lat} lng:${val.lng}</td>
+      <td><button onclick="onDeleteMarker(${idx})">Delete</button></td>
+    </tr>
+`;
+  });
+  $('.table-body').html(strHTML);
+}
+
+function onDeleteMarker(idx) {
+  deleteMarker(idx);
+  renderTable();
 }

@@ -1,6 +1,5 @@
 'use strict';
-var gMarkers = [];
-
+var gMarkers;
 $(init);
 function init() {
   if (!loadFromStorage('mapData') || loadFromStorage('mapData').length === 0) {
@@ -13,6 +12,7 @@ function init() {
       },
     ];
   } else gMarkers = loadFromStorage('mapData');
+  renderTable();
 }
 
 function userInput(pos) {
@@ -22,7 +22,6 @@ function userInput(pos) {
 }
 
 function saveMarker(userTxt, pos) {
-  console.log(pos);
   var regex = /[-]?[\d]+[.][\d]*/g;
   var newPos = pos.match(regex);
   var info = {
@@ -32,5 +31,15 @@ function saveMarker(userTxt, pos) {
     name: userTxt,
   };
   gMarkers.push(info);
+  saveToStorage('mapData', gMarkers);
+}
+
+function getMarkersData() {
+  gMarkers = loadFromStorage('mapData');
+  return gMarkers;
+}
+
+function deleteMarker(idx) {
+  gMarkers.splice(idx, 1);
   saveToStorage('mapData', gMarkers);
 }

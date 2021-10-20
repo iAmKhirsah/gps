@@ -1,8 +1,8 @@
 'use strict';
 
-$(init);
+$(initUserPref);
 
-function init() {
+function initUserPref() {
   var colors = loadFromStorage('userData');
   setColor(colors.bgColor, colors.txtColor, true);
 }
