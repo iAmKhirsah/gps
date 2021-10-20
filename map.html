@@ -27,7 +27,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -44,9 +43,9 @@
         </form>
       </div>
     </nav>
-    <h1>Welcome to the map!</h1>
 
     <div class="container">
+      <h1>Welcome to the map!</h1>
       <div id="map"></div>
     </div>
   </body>
@@ -60,8 +59,13 @@
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
     crossorigin="anonymous"
   ></script>
+  <script src="js/services/util-service.js"></script>
+  <script src="js/services//storage-service.js"></script>
   <script src="/js/services/map-service.js"></script>
+  <script src="/js/map-controller.js"></script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ_OtORbNSx-qcNp0UH-WlQf22Ht_P4Mg&callback=initMap&libraries=&v=weekly"
-  ></script>
+  >
+    async
+  </script>
 </html>
