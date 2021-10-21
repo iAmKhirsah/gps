@@ -24,7 +24,7 @@ function getDateOfBirth() {
   return dob;
 }
 
-function setColor(bgc, txtc, isReset = false) {
+function setColor(bgc = 'red', txtc = 'white', isReset = false) {
   $('body').css({ 'background-color': bgc, color: txtc });
   if (isReset) {
     $('#bg-color').val(bgc);

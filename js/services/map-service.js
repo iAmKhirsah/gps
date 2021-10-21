@@ -1,9 +1,10 @@
 'use strict';
-var gMarkers;
+var gLocations;
+
 $(init);
 function init() {
   if (!loadFromStorage('mapData') || loadFromStorage('mapData').length === 0) {
-    gMarkers = [
+    gLocations = [
       {
         id: _makeId(3),
         lat: 29.55208744174587,
@@ -11,8 +12,8 @@ function init() {
         name: 'eilat',
       },
     ];
-  } else gMarkers = loadFromStorage('mapData');
-  renderTable();
+  } else gLocations = loadFromStorage('mapData');
+  renderTable(gLocations);
 }
 
 function userInput(pos) {
@@ -30,16 +31,16 @@ function saveMarker(userTxt, pos) {
     lng: newPos[1],
     name: userTxt,
   };
-  gMarkers.push(info);
-  saveToStorage('mapData', gMarkers);
+  gLocations.push(info);
+  saveToStorage('mapData', gLocations);
 }
 
 function getMarkersData() {
-  gMarkers = loadFromStorage('mapData');
-  return gMarkers;
+  gLocations = loadFromStorage('mapData');
+  return gLocations;
 }
 
 function deleteMarker(idx) {
-  gMarkers.splice(idx, 1);
-  saveToStorage('mapData', gMarkers);
+  gLocations.splice(idx, 1);
+  saveToStorage('mapData', gLocations);
 }

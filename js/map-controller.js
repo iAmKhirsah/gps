@@ -12,10 +12,11 @@ function initMap() {
     map: map,
   });
   infoWindow = new google.maps.InfoWindow();
-  const locationButton = document.createElement('button');
-  locationButton.textContent = 'Pan to Current Location';
+  const locationButton = document.createElement('img');
+    locationButton. src = './img/target.png';   
+  // locationButton.textContent = 'Pan to Current Location';
   locationButton.classList.add('custom-map-control-button');
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(locationButton);
   locationButton.addEventListener('click', () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -52,6 +53,10 @@ function initMap() {
   });
 }
 
+function moveTo(lat,lng){
+  map.setCenter({lat,lng})
+}
+
 function onUserInput(pos) {
   userInput(pos);
   renderTable();
@@ -67,8 +72,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-function renderTable() {
-  var locations = getMarkersData();
+function renderTable(locations = getMarkersData()) {
+  
   var strHTML = '';
   locations.forEach((val, idx) => {
     strHTML += `
@@ -77,6 +82,7 @@ function renderTable() {
       <td>${val.name}</td>
       <td>lat:${val.lat} lng:${val.lng}</td>
       <td><button onclick="onDeleteMarker(${idx})">Delete</button></td>
+      <td><button onclick="moveTo(${val.lat},${val.lng})">Move To</button></td>
     </tr>
 `;
   });
